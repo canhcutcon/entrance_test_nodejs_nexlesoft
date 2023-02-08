@@ -1,9 +1,8 @@
-const dotenv = require("dotenv")
+dotenv = require("dotenv")
 const express = require("express")
 const cors = require("cors")
 const http = require("http")
 const routers = require("./routers")
-const database = require("../src/config/database")
 
 const app = express()
 const port = 3000
@@ -16,7 +15,7 @@ const server = http.createServer(app)
 routers(app)
 
 server.listen(port, function () {
-  console.log("Server start in http://localhost:" + port)
+    console.log("Server start in http://localhost:" + port)
 })
 
 module.exports = app

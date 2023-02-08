@@ -13,7 +13,7 @@ class AuthService {
      * @param {*} userId get userId to generate token and refresh token
      * @returns token, refreshToken
      */
-  async generateAndUpdateAccessTokenAndRefreshToken (userId) {
+  async generateAndUpdateAccessTokenAndRefreshToken(userId) {
     const accessToken = await tokenUtils.generateToken(
       { userId },
       process.env.JWT_LIFE_ACCESS_TOKEN
@@ -51,7 +51,7 @@ class AuthService {
             displayName: `${firstName} ${lastName}`
         };
      */
-  async signUp (userInfo) {
+  async signUp(userInfo) {
     const { email, password, firstName, lastName } = await validateSignUpInfo(userInfo)
 
     const user = {
@@ -72,7 +72,7 @@ class AuthService {
     }
   }
 
-  async signIn (userInfo) {
+  async signIn(userInfo) {
     const { email, password } = await validateSignIn(userInfo)
 
     const user = await User.getUserByEmailPassword(email, password)
@@ -94,27 +94,28 @@ class AuthService {
     }
   }
 
-  async refreshToken (refreshToken) {
+  async refreshToken(refreshToken) {
     // validate token
     if (!refreshToken) { throw new MyError("Missing parameter!") }
 
     const reToken = await Token.getRefreshToken(refreshToken)
-    console.log("🚀 ~ file: auth.service.js:105 ~ AuthService ~ refreshToken ~ reToken", reToken)
 
-    if (!reToken) { throw new NotFoundError("Refresh token does not exist!") }
+    if (!reToken)
+      throw new NotFoundError("Refresh token does not exist!")
 
     const { userId } = await tokenUtils.verifyToken(refreshToken)
 
     const user = await User.getUserById(userId)
 
-    if (!user) { throw new MyError("User not found!") }
+    if (!user)
+      throw new MyError("User not found!")
 
     await Token.deleteRefreshToken(refreshToken)
 
     return await this.generateAndUpdateAccessTokenAndRefreshToken(userId)
   }
 
-  async signOut (userId) {
+  async signOut(userId) {
     if (!userId) { throw new MyError("Missing parameter!") }
 
     await Token.deleteRefreshTokenByUser(userId)
