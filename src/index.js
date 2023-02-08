@@ -16,5 +16,5 @@ const server = http.createServer(app);
 routers(app);
 
 server.listen(port, function () {
-    console.log('App start in http://localhost:' + port);
+    console.log('Server start in http://localhost:' + port);
 });
