@@ -1,27 +1,26 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt")
 
 const commonUtil = {
-    /**
-     * 
-     * @param {*} obj 
+  /**
+     *
+     * @param {*} obj
      * @returns return true if obj empty
      */
-    isEmpty: (obj) => {
-        if (!obj) return true;
-        return Object.keys(obj).length === 0;
-    },
+  isEmpty: (obj) => {
+    if (!obj) return true
+    return Object.keys(obj).length === 0
+  },
 
-    /**
-     * 
+  /**
+     *
      * @param {*} value password receive from client
-     * @returns password encrypted using bcrypt 
+     * @returns password encrypted using bcrypt
      */
-    hashPassword: async (value) => {
-        if (!value) return null;
+  hashPassword: async (value) => {
+    if (!value) return null
 
-        return await bcrypt.hash(value, 8);
-    }
-};
+    return await bcrypt.hash(value, 8)
+  }
+}
 
-module.exports = commonUtil;
-
+module.exports = commonUtil
