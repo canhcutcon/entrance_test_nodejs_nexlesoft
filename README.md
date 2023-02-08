@@ -35,3 +35,15 @@ npm start
 -   `[POST] /sign-out`: sign out.
     -   body: {}.
     -   result: {}.
+    
+    
+    =====================
+    ###TEST
+    ##To test api sign up use
+    npm run test-signup
+    
+    ##To test api sign in use
+    npm run test-signin
+    
+    ##To test api refresh token
+    npm run test-refreshtoken
