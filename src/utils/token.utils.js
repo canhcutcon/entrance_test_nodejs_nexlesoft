@@ -1,10 +1,12 @@
-const dotenv = require('dotenv');
+const dotenv = require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
+const MyError = require('../exception/myerror');
 
 const tokenUtils = {
     generateToken: async (data, tokenLife) => {
         if (!data) return null;
+        console.log("🚀 ~ file: token.utils.js:17 ~ generateToken: ~ process.env.JWT_KEY", process.env.JWT_KEY)
 
         return await jwt.sign(
             { ...data, createdAt: new Date() },
@@ -16,9 +18,9 @@ const tokenUtils = {
     },
 
     verifyToken: async (token) => {
-        if (!token) return new Error('Token invalid');
+        if (!token) return new MyError('Token Invalid');
 
-        return await expressJwt({ secret: process.env.JWT_KEY });
+        return await jwt.verify(token, process.env.JWT_KEY);
     },
 };
 

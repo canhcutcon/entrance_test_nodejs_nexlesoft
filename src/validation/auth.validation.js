@@ -1,6 +1,6 @@
 const User = require('../model/users.model');
 const commonUtil = require('../utils/common.utils');
-const MyError = require('../exception/MyError');
+const MyError = require('../exception/myerror');
 
 const EMAIL_INVALID = 'Email Invalid!';
 const EMAIL_EXIST_INVALID = 'Email already exist!';

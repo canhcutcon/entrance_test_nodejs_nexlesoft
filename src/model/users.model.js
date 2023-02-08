@@ -1,4 +1,6 @@
+const bcrypt = require('bcrypt');
 const knex = require('../config/database');
+const MyError = require('../exception/myerror');
 
 class User {
     static async getAllUser() {
@@ -6,11 +8,23 @@ class User {
     }
 
     static async getUserById(id) {
-        return await knex.from('Users').where({ id: id }).first();
+        return await knex.select().from('Users').where({ id: id }).first();
     }
 
     static async getUserByEmail(email) {
         return await knex.from('Users').where({ email: email }).first();
+    }
+
+    static async getUserByEmailPassword(email, password) {
+        const user = await knex.from('Users').where({ email: email }).first();
+
+        if (!user)
+            throw new MyError('User not found!');
+
+        const isPassMatch = await bcrypt.compare(password, user.password);
+        if (!isPassMatch)
+            throw new MyError('Password is wrong!');
+        return user;
     }
 
     static async getTokenInfoByUserId(userId) {
@@ -30,6 +44,8 @@ class User {
                 knex.destroy();
             });
     }
+
+
 
 }
 
