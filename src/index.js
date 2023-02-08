@@ -18,3 +18,5 @@ routers(app);
 server.listen(port, function () {
     console.log('Server start in http://localhost:' + port);
 });
+
+module.exports = app;

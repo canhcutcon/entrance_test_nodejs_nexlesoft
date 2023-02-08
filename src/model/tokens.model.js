@@ -1,9 +1,6 @@
 const knex = require('../config/database');
 
 class Token {
-    static async getAllToken() {
-        return await knex.select().from('Tokens');
-    }
     static async createToken(token) {
         return await knex('Tokens').insert(token)
             .then((result) => {
