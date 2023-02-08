@@ -1,8 +1,8 @@
 # entrance_test_nodejs_nexlesoft
 
 #How to run 
-npm install || npm i
-npm start
+`npm install || npm i`
+`npm start`
 
 ## API
 
@@ -40,10 +40,10 @@ npm start
     =====================
     ###TEST
     ##To test api sign up use
-    npm run test-signup
+    `npm run test-signup`
     
     ##To test api sign in use
-    npm run test-signin
+   `npm run test-signin`
     
     ##To test api refresh token
-    npm run test-refreshtoken
+    `npm run test-refreshtoken`
